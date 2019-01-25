@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" style="height:100%;margin: 0;padding: 0;border: 0;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        ul,li{
+            margin: 0px;
+            padding: 0;
+            border: 0;
+            list-style: none;
+        }
+        #menu>ul>li>span{
+            display: block;
+            width: 100%;
+            height: 30px;
+            background: skyblue;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body style="height:100%;margin: 0;padding: 0;border: 0;">
+    <div class="header" style="width: 100%; height: 50px; background: Cyan;">
+
+    </div>
+    <div class="menu" id="menu" style="width: 200px; height:500px; float: left;background: lime;">
+        <ul></ul>
+    </div>
+    <div class="iframe" style="width: 200px; height:500px; float: left;">
+        <iframe id="iframe" src="./html/login.html" frameborder="0"></iframe>
+    </div>
+</body>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(function(){
+    var menulist = [
+        {title: '标题一', menu:[{title: '子标题一', url: './html/login.html'}, {title: '子标题二', url: './html/login.html'}]},
+        {title: '标题2', menu:[{title: '子标题一', url: './html/login.html'}, {title: '子标题二', url: './html/login.html'}]}
+    ]
+    $('#menu').css('height',$(window).height() - 50 + 'px')
+    $(menulist).each(function(index, val){
+        $('#menu ul').append(
+                '<li>'+ 
+                    '<span>' + val.title + '</span>' +
+                '</li>'
+        )
+        if(val.menu){
+            $($('#menu>ul>li').eq(index)).append('<ul></ul>')
+            $(val.menu).each(function(i, v){
+                $($('#menu>ul>li>ul').eq(index)).append(
+                        '<li>'+ v.title +'</li>'
+                )
+            })
+        }
+    })
+    $('.iframe').css({
+        'height':$(window).height() - 50 + 'px',
+        'width': $(window).width() - 200 + 'px'
+    })
+    $('#iframe').css({
+        'height':$(window).height() - 55 + 'px',
+        'width': $(window).width() - 210 + 'px'
+    })
+})
+</script>
+</html>
